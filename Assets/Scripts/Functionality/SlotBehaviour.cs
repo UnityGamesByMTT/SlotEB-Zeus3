@@ -184,6 +184,7 @@ public class SlotBehaviour : MonoBehaviour
 
     private void CompareBalance()
     {
+       
         if (currentBalance < currentTotalBet)
         {
             uiManager.LowBalPopup();
@@ -229,7 +230,7 @@ public class SlotBehaviour : MonoBehaviour
         if (TotalBet_text) TotalBet_text.text = (double.Parse(SocketManager.initialData.betMultiplier[BetCounter]) * SocketManager.initialData.baseBet).ToString();
         currentTotalBet = double.Parse(SocketManager.initialData.betMultiplier[BetCounter]) * SocketManager.initialData.baseBet;
         if (Info_text) Info_text.text = SocketManager.initialData.baseBet + " base bet x " + SocketManager.initialData.betMultiplier[BetCounter] + " bet multiplier = " + currentTotalBet + " total bet";
-        CompareBalance();
+        
     }
 
     #region InitialFunctions
@@ -318,7 +319,7 @@ public class SlotBehaviour : MonoBehaviour
         BetCounter = 0;
         if (LineBet_text) LineBet_text.text = SocketManager.initialData.betMultiplier[BetCounter].ToString();
         if (TotalBet_text) TotalBet_text.text = (double.Parse(SocketManager.initialData.betMultiplier[BetCounter]) * SocketManager.initialData.baseBet).ToString();
-        if (TotalWin_text) TotalWin_text.text = "0.00";
+        if (TotalWin_text) TotalWin_text.text = "0.000";
         if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("F3");
         currentBalance = SocketManager.playerdata.Balance;
         currentTotalBet = double.Parse(SocketManager.initialData.betMultiplier[BetCounter]) * SocketManager.initialData.baseBet;
@@ -507,6 +508,7 @@ public class SlotBehaviour : MonoBehaviour
     //starts the spin process
     internal void StartSlots(bool autoSpin = false)
     {
+        
         if (audioController) audioController.PlaySpinButtonAudio();
 
         if (!autoSpin)
@@ -865,7 +867,7 @@ public class SlotBehaviour : MonoBehaviour
 
     internal void CheckWinPopups()
     {
-        if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.currentWining.ToString();
+        if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.currentWining.ToString("f3");
         if (SocketManager.playerdata.currentWining >= currentTotalBet * 10)
         {
             uiManager.BigWinSequence(SocketManager.playerdata.currentWining);
